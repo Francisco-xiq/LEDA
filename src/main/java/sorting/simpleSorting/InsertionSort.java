@@ -1,5 +1,5 @@
 package sorting.simpleSorting;
-
+import util.Util;
 import sorting.AbstractSorting;
 
 /**
@@ -12,7 +12,14 @@ public class InsertionSort<T extends Comparable<T>> extends AbstractSorting<T> {
 
 	@Override
 	public void sort(T[] array, int leftIndex, int rightIndex) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not Implemented yet!");
+		for(int i=leftIndex; i >= rightIndex;i++){
+			int min = leftIndex;
+			for(int j= ++leftIndex; j >= rightIndex;j++ ){
+				if(array[i].compareTo(array[j]) > 0  ){
+					min = j;
+				}
+			Util.swap(array, i, min);
+			}
+		}
 	}
 }
