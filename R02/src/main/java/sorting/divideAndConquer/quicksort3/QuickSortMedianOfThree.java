@@ -1,5 +1,7 @@
 package sorting.divideAndConquer.quicksort3;
 
+import java.util.Arrays;
+
 import sorting.AbstractSorting;
 
 /**
@@ -20,7 +22,29 @@ public class QuickSortMedianOfThree<T extends Comparable<T>> extends
 		AbstractSorting<T> {
 
 	public void sort(T[] array, int leftIndex, int rightIndex) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(array.length != 0){
+			if(leftIndex < rightIndex){
+				int pivotIndex = pickPivot(array, leftIndex, rightIndex);
+				sort(array, leftIndex, pivotIndex - 1); //chamada recursiva que pega a parte inferior ao pivot
+				sort(array, pivotIndex + 1, rightIndex); // chamada recursiva que pega a parte superior ao pivot
+			}
+		}
 	}
+
+	public int pickPivot(T[] array, int leftIndex, int rightIndex){
+		int mid = (leftIndex + rightIndex) / 2;
+
+		T[] arrayOrganizado = (T[]) new Comparable[]{array[leftIndex], array[mid], array[rightIndex]};
+		Arrays.sort(arrayOrganizado);
+
+		if (arrayOrganizado[1] == array[leftIndex]) {
+			return leftIndex;
+		}else if(arrayOrganizado[1] == array[mid]){ 
+			 return mid;
+		}else{ 
+			return rightIndex;
+		}
+		
+	}
+	
 }

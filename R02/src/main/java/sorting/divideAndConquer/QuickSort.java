@@ -1,5 +1,5 @@
 package sorting.divideAndConquer;
-
+import util.Util;
 import sorting.AbstractSorting;
 
 /**
@@ -14,7 +14,33 @@ public class QuickSort<T extends Comparable<T>> extends AbstractSorting<T> {
 
 	@Override
 	public void sort(T[] array, int leftIndex, int rightIndex) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Not implemented yet!");
+		if(array.length != 0){
+			if(leftIndex < rightIndex){
+				int pivotIndex = partition(array, leftIndex, rightIndex);
+				sort(array, leftIndex, pivotIndex - 1); //chamada recursiva que pega a parte inferior ao pivot
+				sort(array, pivotIndex + 1, rightIndex); // chamada recursiva que pega a parte superior ao pivot
+			}
+		}
 	}
+
+		public int partition(T[] array, int leftIndex, int rightIndex){
+			
+			T pivot = array[leftIndex];
+			int i = leftIndex;
+			
+			//laco verificando todos os outros elementos do array e comparando com o pivot, se for menor q o pivot, troca com i++
+			for(int j = leftIndex + 1; j <= rightIndex; j++){
+				if(array[j].compareTo(pivot) < 0){
+					i++;
+					Util.swap(array, i, j);
+				}
+			}  
+
+			//um swap pra trocar o pivot (index i) com o primeiro elemento do array
+			Util.swap(array, leftIndex, i);
+			
+			return i;
+		
+		
+		}
 }
